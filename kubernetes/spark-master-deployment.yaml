@@ -1,7 +1,8 @@
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: spark-master
+  namespace: gcbi-ns-test
 spec:
   replicas: 1
   selector:
@@ -12,13 +13,19 @@ spec:
       labels:
         component: spark-master
     spec:
+      imagePullSecrets:             
+      - name: imagepull-secret
       containers:
         - name: spark-master
-          image: spark-hadoop:2.2.1
+          image: swr.cn-north-1.myhuaweicloud.com/gaojx/spark:git_version
           command: ["/spark-master"]
           ports:
             - containerPort: 7077
             - containerPort: 8080
           resources:
+            limits:
+              cpu: 250m
+              memory: 1Gi
             requests:
-              cpu: 100m
+              cpu: 250m
+              memory: 1Gi

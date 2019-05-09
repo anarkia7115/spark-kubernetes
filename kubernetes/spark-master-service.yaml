@@ -2,6 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: spark-master
+  namespace: gcbi-ns-test
 spec:
   ports:
     - name: webui
@@ -11,4 +12,5 @@ spec:
       port: 7077
       targetPort: 7077
   selector:
-    component: spark-master
+    app: spark-master
+

@@ -2,6 +2,7 @@ kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
   name: spark-worker
+  namespace: gcbi-ns-test
 spec:
   replicas: 2
   selector:
@@ -14,7 +15,8 @@ spec:
     spec:
       containers:
         - name: spark-worker
-          image: spark-hadoop:2.2.1
+          image: swr.cn-north-1.myhuaweicloud.com/gaojx/spark:git_version
+
           command: ["/spark-worker"]
           ports:
             - containerPort: 8081
